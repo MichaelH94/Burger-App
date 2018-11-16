@@ -1,0 +1,26 @@
+{
+  "name": "eatdaburger",
+  "version": "1.0.0",
+  "description": "Eat-Da-Burger! Full Stack application for the KU Coding Bootcamp",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelH94/Burger-App.git"
+  },
+  "author": "Michael Haggard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelH94/Burger-App/issues"
+  },
+  "homepage": "https://github.com/MichaelH94/Burger-App#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.16.0"
+  }
+}
