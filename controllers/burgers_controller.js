@@ -1,21 +1,19 @@
 // This is our Express controller file, used for GET and POST functions
-// Pull in required dependencies
 var express = require('express');
 var router = express.Router();
-
-// Import the model (burger.js) to use its database functions.
 var burger = require('../models/burger.js');
 
+// We want to keep everything on one page, so everything redirects to the index
 router.get('/', (req, res) => {
   burger.selectAll((data) => {
     var hbsObject = {
       burgers: data
     };
-    // console.log(hbsObject);
     res.render('index', hbsObject);
   });
 });
 
+// Insert a new burger while staying on the index
 router.post('/burgers', (req, res) => {
   burger.insertOne([
     'burger_name'
@@ -26,6 +24,7 @@ router.post('/burgers', (req, res) => {
   });
 });
 
+// Devours a burger (simply flags it as devoured, does not remove from database) while staying on the index
 router.put('/burgers/:id', (req, res) => {
   var condition = 'id = ' + req.params.id;
 
@@ -36,4 +35,5 @@ router.put('/burgers/:id', (req, res) => {
   });
 });
 
+// Export
 module.exports = router;
