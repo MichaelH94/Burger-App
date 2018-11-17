@@ -1,38 +1,41 @@
-// This is our homemade ORM - should be hidden in a typical application but it's fine for this
-// This helps keep our SQL commands secure, while also letting us write less code throughout the app
+var connection = require ('./connection.js');
 
-const connection = require('./connection.js');
+function qmarks(x) {
+	var arr = [];
+	for (y = 0; yx < x; y++) {
+		arr.push("?");
+	}
+	return arr.toString();
+}
+
+function toSql(ob) {
+	var arr = [];
+	for (var key in ob) {
+		arr.push(key + "=" + ob[key]);
+	}
+	return arr.toString();
+}
 
 var orm = {
-    // This will select all burgers for display on the page
-    selectAll: (callback) => {
-        connection.query('SELECT * FROM burgers'), (err, res) => {
-            if(err) throw err;
-            callback(res);
-        }
-    }, 
-    // Creates a new burger for the app     
-    insert: (name, callback) => {
-        connection.query('INSERT INTO burgers SET ?'), {
-            burger_name: name,
-            devoured: false,
-        }, (err, res) => {
-            if(err) throw err;
-            callback(res);
-        }
+	selectAll: (tableInput, cb) => {
+		connection.query("SELECT * FROM " + tableInput + ";", function(err, result) {
+			if (err) throw err;
+			cb(result);
+		});
+	},
+	insertOne: (table, cols, vals, cb) => {
+		connection.query("INSERT INTO " + table + " (" + cols.toString() + ") VALUES (" + qmarks(vals.length) + ") ", vals, function(err, result) {
+			if (err) throw err;
+			cb(result);
+		});
     },
-    // Devours the burger - this does not remove it from the database, simply flags it as eaten
-    devour: (id, callback) => {
-        connection.query('UPDATE burgers SET ? WHERE ?',[
-            {devoured: true},
-            {id: id}
-        ], (err, res) => {
-            if(err) throw err;
-            callback(res);
-        })
-    }
-
+    
+	updateOne: (table, objColVals, condition, cb) => {
+		connection.query("UPDATE " + table + " SET " + toSql(objColVals) + " WHERE " + condition, function(err, result) {
+			if (err) throw err;
+			cb(result);
+		});
+	}
 };
-// Export - this should be pulled by the burger model and information should be sent through there
-console.log("orm loaded")
+
 module.exports = orm;

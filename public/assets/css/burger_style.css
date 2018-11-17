@@ -1,0 +1,33 @@
+body {
+    background-color: sandybrown;
+}
+
+#burgerimg {
+   display: block;
+   margin: auto;
+}
+
+.ready {
+    font-weight: normal;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgreen;
+    border: none;
+}
+
+
+.devoured {
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    background-color: red;
+}
+
+
+

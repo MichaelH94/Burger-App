@@ -1,26 +1,25 @@
 // Sends information to the ORM to be processed through the database - should be hidden, but kept available for this application
 
-const orm = require('../config/orm.js');
+var orm = require("../config/orm.js");
 
 var burger = {
-    // This will select all burgers for display on the page
-    selectAll: (callback) => {
-        orm.selectAll((res) => {
-            callback(res);
-        });
+    selectAll: function(cb) {
+      orm.selectAll('burgers', (res) => {
+        cb(res);
+      });
     },
-    // Create a new burger, simply flags it as eaten
-    insert: (name, callback) => {
-        orm.insert(name, (res) => {
-            callback(res);
-        });
+  
+    insertOne: (cols, vals, cb) => {
+      orm.insertOne('burgers', cols, vals, function(res) {
+        cb(res);
+      });
     },
-    // Devours the burger - this does not remove it from the database, simply flags it as eaten
-    devour: (id, callback) => {
-        orm.devour(id, (res) =>{
-            callback(res);
-        });
+  
+    updateOne: (objColVals, condition, cb) => {
+      orm.updateOne('burgers', objColVals, condition, function(res) {
+        cb(res);
+      });
     }
-};
-// Export
+  };
+
 module.exports = burger;

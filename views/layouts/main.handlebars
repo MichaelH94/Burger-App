@@ -1,43 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/assets/css/burger_style.css">
-    <title>Eat-Da-Burger</title>
-  </head>
-  <body>
-    <div class="container">
-        <center>
-            <div class="row">
-                <img src="/public/assets/img/burger.png">
-            </div>
-            <div class="row">
-                <h1>Eat-Da-Burger!</h1>
-                <h4>A Node, Express and Handlebars application.</h4>
-            </div>
-        </center>
-    </div>
+	<link rel="stylesheet" href="assets/css/burger_style.css" type="text/css" />
+	<title>Eat-Da-Burger</title>
+</head>
 
-   {{{body}}}
+	<body>
+		<img src="/assets/img/burger.png" width="400px" id="burgerimg">
 
-    <form action="burger/create" method="POST">
-    <div class="row">
-        <div class="form-group">
-            <center>
-                <label for="new_burger">Add a new burger!</label>
-                <textarea class="form-control" colums="8" rows="4" id="new_burger" name="burger_name"></textarea>
-            </center>
-        </div>
-        <center>
-            <button id="submit-button" type="submit" class="btn btn-primary">Place burger</button>
-        </center>
-    </div>
-    </form>
-  
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  </body>
+		{{{ body }}}
+
+	</body>
 </html>
-
-

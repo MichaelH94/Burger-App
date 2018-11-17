@@ -1,38 +1,39 @@
 // This is our Express controller file, used for GET and POST functions
+// Pull in required dependencies
+var express = require('express');
+var router = express.Router();
 
-const express = require('express');
-const router = express.Router();
-const burger = require('../models/burger.js');
+// Import the model (burger.js) to use its database functions.
+var burger = require('../models/burger.js');
 
-// We want to keep everything on one page, so redirect the user to the index
 router.get('/', (req, res) => {
-    res.redirect('/index');
+  burger.selectAll((data) => {
+    var hbsObject = {
+      burgers: data
+    };
+    // console.log(hbsObject);
+    res.render('index', hbsObject);
+  });
 });
 
-// Display the index and display the burgers
-router.get('/index', (req, res) => {
-    burger.selectAll((data) => {
-        let hbsObject = {
-            burgers: data
-        };
-
-        res.render('index', hbsObject);
-    }); 
+router.post('/burgers', (req, res) => {
+  burger.insertOne([
+    'burger_name'
+  ], [
+    req.body.burger_name
+  ], (data) => {
+    res.redirect('/');
+  });
 });
 
-// Create a new burger for consumption and then redirect to the index to keep everything on one page
-router.post('/burger/create', (req, res) => {
-    burger.insert(req.body.burger_name, () => {
-        res.redirect('/index');
-    });
+router.put('/burgers/:id', (req, res) => {
+  var condition = 'id = ' + req.params.id;
+
+  burger.updateOne({
+    devoured: true
+  }, condition, (data) => {
+    res.redirect('/');
+  });
 });
 
-// Devour a burger (flag it as eaten, do not remove from the database) and then redirect to the index to keep everything on one page
-router.post('/burger/eat/:id', (req, res) => {
-    burger.devour(req.params.id, () => {
-        res.redirect('/index');
-    })
-})
-
-// Export
 module.exports = router;
