@@ -2,14 +2,15 @@
 // If this were a proper application we would want to use secure connections
 
 const mysql = require('mysql');
+const config = require("./config.json");
 
-var connection = mysql.createConnection({
-    port: 3306,
-    host: "gx97kbnhgjzh3efb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    user: "ayp9hm6p6aaid755",
-    password: "pxnva0p4t2r713wg",
-    database: "e1vljno4kmzf1mv9"
-})
+const connection = mysql.createConnection({
+    host: config.host,
+    port: config.dbPort,
+    user: config.dbUser,
+    password: config.dbPass, 
+    database: config.dbName
+});
 
 // Connection
 connection.connect((err) => {
