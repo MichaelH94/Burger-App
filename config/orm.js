@@ -6,7 +6,7 @@ var connection = require ('./connection.js');
 // SQL helper functions
 function qmarks(x) {
 	var arr = [];
-	for (y = 0; yx < x; y++) {
+	for (y = 0; y < x; y++) {
 		arr.push("?");
 	}
 	return arr.toString();
